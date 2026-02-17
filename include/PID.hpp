@@ -24,6 +24,5 @@ private:
     double min_output_;
     double max_output_;
 
-    bool integrator_enabled_;
-
+    bool first_run_;
 };
