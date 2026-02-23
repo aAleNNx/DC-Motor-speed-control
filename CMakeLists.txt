@@ -10,4 +10,5 @@ include_directories(include)
 add_executable(pid_app
     src/main.cpp
     src/PID.cpp
+    src/DCMotor.cpp
 )   
