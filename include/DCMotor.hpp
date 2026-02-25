@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream>
-
 class DCMotor {
 public:
     DCMotor(double J, double b, double K, double Ts);

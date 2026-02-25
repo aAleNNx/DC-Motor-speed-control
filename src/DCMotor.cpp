@@ -1,6 +1,7 @@
 #include "DCMotor.hpp"
 
 #include <assert.h>
+#include <iostream>
 
 DCMotor::DCMotor(double J, double b, double K, double Ts):
     J_(J),

@@ -1,7 +1,6 @@
 #include <iostream>
 
-#include "PID.hpp"
-#include "DCMotor.hpp"
+#include "simulation.hpp"
 
 int main() {
     double Kp = 1.5;
@@ -23,20 +22,7 @@ int main() {
 
     DCMotor motor = DCMotor(J, b, K, Ts);
 
-    double omega = 0.0;
-
-    for(int i = 0; i < iter; i++){
-        double u = regulator.update(setpoint, omega);
-        
-        motor.step(u);
-        omega = motor.getSpeed();
-
-        if(i == 200){motor.setLoadTorque(8);}
-        else if(i == 700){motor.setLoadTorque(2);};
-        
-        std::cout << "iteracja: " << i + 1
-        << "    measurement: " << omega 
-        << "    control: " << u << std::endl;
-    }
+    Simulation sim = Simulation(regulator, motor, Ts, setpoint, iter);
+    sim.run();
     return 0;
 }

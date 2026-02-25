@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream>
-
 class PID{
 public:
     PID(double kp, double ki, double kd, double Ts);
