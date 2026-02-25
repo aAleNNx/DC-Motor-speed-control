@@ -8,7 +8,7 @@ int main() {
     double Kd = 0.01;
     double Ts = 0.01;
 
-    int iter = 1000;
+    int iter = 100;
 
     PID regulator = PID(Kp, Ki, Kd, Ts);
 

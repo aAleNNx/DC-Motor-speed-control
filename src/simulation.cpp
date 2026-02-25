@@ -14,12 +14,12 @@ Simulation::Simulation(PID& pid, DCMotor& motor, double Ts, double setpoint, int
 void Simulation::run(){
     for(int i = 0; i < max_iter_; i++){
         double u = pid_.update(setpoint_, motor_.getSpeed());
-        time_ += Ts_;
         motor_.step(u);
 
         std::cout << "time: " << time_
         << "    measurement: " << motor_.getSpeed()
         << "    control: " << u << std::endl;
+        time_ += Ts_;
     }
 }
 
