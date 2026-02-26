@@ -17,12 +17,7 @@ void DataLogger::saveToFile(const std::string& filename){
         std::cerr << "opening error";
         return;
     }
-    if (time_.size() != setpoint_.size() ||
-    time_.size() != measurement_.size() ||
-    time_.size() != control_.size())
-    {
-        std::cout << "Diffrent sizes" << std::endl;
-    }
+    
     file << "Time, Setpoint, Speed, Control\n";
 
     for(size_t i = 0; i < time_.size(); i++){

@@ -8,7 +8,7 @@ int main() {
     double Kd = 0.01;
     double Ts = 0.01;
 
-    int iter = 100;
+    int iter = 500;
 
     PID regulator = PID(Kp, Ki, Kd, Ts);
 
@@ -21,10 +21,10 @@ int main() {
     regulator.setOutputLimits(-12.0, 12.0);
 
     DCMotor motor = DCMotor(J, b, K, Ts);
-
     DataLogger log;
-
     Simulation sim(regulator, motor, log, Ts, setpoint, iter);
+
+    sim.setDisturbance(2.0, 0.3);
 
     sim.run();
 

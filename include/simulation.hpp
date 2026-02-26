@@ -13,6 +13,8 @@ public:
     void setSetpoint(double setpoint);
     void reset();
 
+    void setDisturbance(double time, double valude);
+
 private:
     PID& pid_;
     DCMotor& motor_;
@@ -21,4 +23,9 @@ private:
     double setpoint_;
     int max_iter_;
     double time_;
+
+    bool disturbance_enabled_;
+    double disturbance_time_;
+    double disturbance_value_;
+    bool disturbance_applied_;
 };

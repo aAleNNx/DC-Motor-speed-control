@@ -13,3 +13,5 @@ pid_app
 *.out
 *.a
 *.so
+
+Test_file
