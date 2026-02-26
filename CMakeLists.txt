@@ -12,4 +12,5 @@ add_executable(pid_app
     src/PID.cpp
     src/DCMotor.cpp
     src/simulation.cpp
+    src/DataLogger.cpp
 )   

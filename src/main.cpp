@@ -22,7 +22,12 @@ int main() {
 
     DCMotor motor = DCMotor(J, b, K, Ts);
 
-    Simulation sim = Simulation(regulator, motor, Ts, setpoint, iter);
+    DataLogger log;
+
+    Simulation sim(regulator, motor, log, Ts, setpoint, iter);
+
     sim.run();
+
+    log.saveToFile("Test_file");
     return 0;
 }

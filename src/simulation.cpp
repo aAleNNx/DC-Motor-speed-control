@@ -2,9 +2,10 @@
 
 #include <iostream>
 
-Simulation::Simulation(PID& pid, DCMotor& motor, double Ts, double setpoint, int max_iter):
+Simulation::Simulation(PID& pid, DCMotor& motor, DataLogger& logger, double Ts, double setpoint, int max_iter):
     pid_(pid),
     motor_(motor),
+    logger_(logger),
     Ts_(Ts),
     setpoint_(setpoint),
     max_iter_(max_iter),
@@ -19,6 +20,7 @@ void Simulation::run(){
         std::cout << "time: " << time_
         << "    measurement: " << motor_.getSpeed()
         << "    control: " << u << std::endl;
+        logger_.log(time_, setpoint_, motor_.getSpeed(), u);
         time_ += Ts_;
     }
 }
