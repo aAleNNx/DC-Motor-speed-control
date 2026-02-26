@@ -24,4 +24,7 @@ def plot_data(file_path):
     plt.grid()
     
     plt.tight_layout()
-    plt.show()
+    plt.savefig('data/response.png', dpi = 300)
+
+if __name__ == "__main__":
+    plot_data('data/simulation_data.csv')

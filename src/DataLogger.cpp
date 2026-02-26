@@ -18,12 +18,12 @@ void DataLogger::saveToFile(const std::string& filename){
         return;
     }
     
-    file << "Time, Setpoint, Speed, Control\n";
+    file << "Time,Setpoint,Speed,Control\n";
 
     for(size_t i = 0; i < time_.size(); i++){
-        file << time_[i] << ", "
-         << setpoint_[i] << ", "
-         << measurement_[i] << ", " 
+        file << time_[i] << ","
+         << setpoint_[i] << ","
+         << measurement_[i] << "," 
          << control_[i] << "\n";
     };
 
