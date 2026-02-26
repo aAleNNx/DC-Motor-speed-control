@@ -27,7 +27,6 @@ int main() {
     sim.setDisturbance(2.0, 0.3);
 
     sim.run();
-
-    log.saveToFile("Test_file");
+    log.saveToFile("data/simulation_data.csv");
     return 0;
 }

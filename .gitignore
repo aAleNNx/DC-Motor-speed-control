@@ -14,4 +14,7 @@ pid_app
 *.a
 *.so
 
-Test_file
+data/
+
+venv/
+__pycache__/
