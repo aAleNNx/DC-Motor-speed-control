@@ -25,13 +25,10 @@ void Simulation::run(){
             motor_.setLoadTorque(disturbance_value_);
             disturbance_applied_ = true;
         }
-
-        std::cout << "time: " << time_
-        << "    measurement: " << motor_.getSpeed()
-        << "    control: " << u << std::endl;
         logger_.log(time_, setpoint_, motor_.getSpeed(), u);
         time_ += Ts_;
     }
+    std::cout << "Simulation completed. Data logged for " << max_iter_ << " iterations." << std::endl;
 }
 
 void Simulation::setSetpoint(double setpoint){
