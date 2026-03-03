@@ -3,18 +3,18 @@
 #include "simulation.hpp"
 
 int main() {
-    double Kp = 1.5;
-    double Ki = 3;
+    double Kp = 10;
+    double Ki = 1;
     double Kd = 0.01;
-    double Ts = 0.01;
+    double Ts = 0.001;
 
-    int iter = 500;
+    int iter = 5000;
 
     PID regulator = PID(Kp, Ki, Kd, Ts);
 
     double setpoint = 10;
 
-    double J = 0.1;
+    double J = 0.01;
     double b = 0.1;
     double K = 0.5;
 
@@ -27,6 +27,7 @@ int main() {
     sim.setDisturbance(2.0, 0.3);
 
     sim.run();
-    log.saveToFile("data/simulation_data.csv");
+
+    log.saveToFile("../data/simulation_data.csv");
     return 0;
 }
