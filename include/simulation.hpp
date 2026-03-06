@@ -13,7 +13,24 @@ public:
     void setSetpoint(double setpoint);
     void reset();
 
-    void setDisturbance(double time, double valude);
+    void addDisturbance(double time, double load);
+    void addSetpointEvent(double time, double setpoint);
+
+    struct Disturbance
+    {
+        double time;
+        double load;
+        bool applied;
+    };
+
+    struct SetpointEvent
+    {
+        double time;
+        double setpoint;
+        bool applied;
+    };
+    
+    
 
 private:
     PID& pid_;
@@ -24,8 +41,7 @@ private:
     int max_iter_;
     double time_;
 
+    std::vector<Disturbance> disturbances_;
     bool disturbance_enabled_;
-    double disturbance_time_;
-    double disturbance_value_;
-    bool disturbance_applied_;
+    std::vector<SetpointEvent> setpoint_events_;
 };

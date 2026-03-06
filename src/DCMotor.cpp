@@ -23,7 +23,7 @@ void DCMotor::step(double voltage){
 }
 
 void DCMotor::setLoadTorque(double Tl){
-    load_torque_ = Tl;
+    load_torque_ += Tl;
 }
 
 double DCMotor::getSpeed() const{

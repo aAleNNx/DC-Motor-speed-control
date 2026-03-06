@@ -10,10 +10,7 @@ Simulation::Simulation(PID& pid, DCMotor& motor, DataLogger& logger, double Ts, 
     setpoint_(setpoint),
     max_iter_(max_iter),
     time_(0.0),
-    disturbance_enabled_(false),
-    disturbance_time_(0.0),
-    disturbance_value_(0.0),
-    disturbance_applied_(false)
+    disturbance_enabled_(false)
 {}
 
 void Simulation::run(){
@@ -21,9 +18,20 @@ void Simulation::run(){
         double u = pid_.update(setpoint_, motor_.getSpeed());
         motor_.step(u);
 
-        if(disturbance_enabled_ && !disturbance_applied_ && time_ >= disturbance_time_){
-            motor_.setLoadTorque(disturbance_value_);
-            disturbance_applied_ = true;
+        if(disturbance_enabled_){
+            for(auto& dist : disturbances_){
+                if(!dist.applied && time_ >= dist.time){
+                    motor_.setLoadTorque(dist.load);
+                    dist.applied = true;
+                }
+            }
+        }
+        
+        for(auto& event : setpoint_events_){
+            if(!event.applied && time_ >= event.time){
+                setSetpoint(event.setpoint);
+                event.applied = true;
+            }
         }
         logger_.log(time_, setpoint_, motor_.getSpeed(), u);
         time_ += Ts_;
@@ -39,11 +47,15 @@ void Simulation::reset(){
     pid_.reset();
     motor_.reset();
     time_ = 0.0;
+    disturbances_.clear();
+    disturbance_enabled_ = false;
 }
 
-void Simulation::setDisturbance(double time, double value){
+void Simulation::addDisturbance(double time, double load){
+    disturbances_.push_back({time, load, false});
     disturbance_enabled_ = true;
-    disturbance_time_ = time;
-    disturbance_value_ = value;
-    disturbance_applied_ = false;
+}
+
+void Simulation::addSetpointEvent(double time, double setpoint){
+    setpoint_events_.push_back({time, setpoint, false});
 }

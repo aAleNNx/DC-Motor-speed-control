@@ -8,13 +8,13 @@ int main() {
     double Kd = 0.01;
     double Ts = 0.001;
 
-    int iter = 5000;
+    int iter = 30000;
 
     PID regulator = PID(Kp, Ki, Kd, Ts);
 
     double setpoint = 10;
 
-    double J = 0.01;
+    double J = 0.3;
     double b = 0.1;
     double K = 0.5;
 
@@ -24,7 +24,9 @@ int main() {
     DataLogger log;
     Simulation sim(regulator, motor, log, Ts, setpoint, iter);
 
-    sim.setDisturbance(2.0, 0.3);
+    sim.addSetpointEvent(5.0, 5);
+    sim.addSetpointEvent(14.0, 15);
+
 
     sim.run();
 
