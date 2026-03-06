@@ -10,6 +10,7 @@ public:
     void reset();
 
     double getSpeed() const;
+    double getVoltage() const;
     double getCurrent() const;
     double getLoadTorque() const;
 

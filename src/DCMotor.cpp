@@ -42,6 +42,10 @@ double DCMotor::getSpeed() const{
     return omega_;
 }
 
+double DCMotor::getVoltage() const{
+    return R_ * current_ + Ke_ * omega_;
+}
+
 void DCMotor::reset(){
     omega_ = 0.0;
     current_ = 0.0;

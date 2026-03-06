@@ -7,10 +7,7 @@ set(CMAKE_BUILD_TYPE Debug)
 
 include_directories(include)
 
-add_executable(pid_app
-    src/main.cpp
-    src/PID.cpp
-    src/DCMotor.cpp
-    src/simulation.cpp
-    src/DataLogger.cpp
+file(GLOB_RECURSE SOURCES "src/*.cpp")
+
+add_executable(pid_app ${SOURCES}
 )   
