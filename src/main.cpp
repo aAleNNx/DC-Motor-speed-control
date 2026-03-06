@@ -16,17 +16,22 @@ int main() {
 
     double J = 0.3;
     double b = 0.1;
-    double K = 0.5;
+    double R = 1.0;
+    double L = 0.1;
+    double Kt = 0.5;
+    double Ke = 0.5;
 
     regulator.setOutputLimits(-12.0, 12.0);
 
-    DCMotor motor = DCMotor(J, b, K, Ts);
+    DCMotor motor = DCMotor(J, b, R, L, Kt, Ke, Ts);
     DataLogger log;
     Simulation sim(regulator, motor, log, Ts, setpoint, iter);
 
     sim.addSetpointEvent(5.0, 5);
     sim.addSetpointEvent(14.0, 15);
 
+    sim.addDisturbance(10.0, 0.5);
+    sim.addDisturbance(20.0, -2.0);
 
     sim.run();
 

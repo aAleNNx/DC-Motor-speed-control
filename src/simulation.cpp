@@ -21,7 +21,7 @@ void Simulation::run(){
         if(disturbance_enabled_){
             for(auto& dist : disturbances_){
                 if(!dist.applied && time_ >= dist.time){
-                    motor_.setLoadTorque(dist.load);
+                    motor_.addLoadTorque(dist.load);
                     dist.applied = true;
                 }
             }
@@ -33,7 +33,7 @@ void Simulation::run(){
                 event.applied = true;
             }
         }
-        logger_.log(time_, setpoint_, motor_.getSpeed(), u);
+        logger_.log(time_, setpoint_, motor_.getSpeed(), u, motor_.getLoadTorque());
         time_ += Ts_;
     }
     std::cout << "Simulation completed. Data logged for " << max_iter_ << " iterations." << std::endl;
