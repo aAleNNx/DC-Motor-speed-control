@@ -3,7 +3,12 @@ import pandas as pd
 
 def plot_data(file_path):
     data = pd.read_csv(file_path)
+
+    nazwa = str(file_path)
+    last_part = (nazwa.split('/')[-1]).split('.')[0]
     
+
+
     plt.figure(figsize=(12, 8))
     
     plt.subplot(3, 1, 1)
@@ -32,9 +37,13 @@ def plot_data(file_path):
     plt.grid()
 
     plt.tight_layout()
-    plt.savefig('data/response.png', dpi = 300)
+    plt.savefig(f'data/{last_part}.png', dpi = 300)
 
-    print("Plot saved as 'data/response.png'")
+    print(f"Plot saved as 'data/{last_part}.png'")
 
 if __name__ == "__main__":
-    plot_data('data/simulation_data.csv')
+    plot_data('data/scenario_disturbance.csv')
+    plot_data('data/scenario_heavy_load.csv')
+    plot_data('data/scenario_saturation.csv')
+    plot_data('data/scenario_setpoint_changes.csv')
+    plot_data('data/scenario_step.csv')
